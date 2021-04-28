@@ -11,12 +11,11 @@ try:
     import hashlib
     import configparser
     import math
-    from pkg_resources import resource_filename
-    from shutil import copyfile
+    # from pkg_resources import resource_filename
+    # from shutil import copyfile
 except ImportError:
     print('Python3 try again')
     exit()
-# import mimetypes
 
 # print (5368709120 >> 10)  # 5242880 kilo Bytes (kB)
 # print (5368709120 >> 20 ) # 5120 Mega Bytes(MB)
@@ -49,7 +48,7 @@ tls=True
                 )
         self.config.read(cfg)
 
-        usage = "usage: %prog [option] example@kindle.cn"
+        usage = "usage: %prog [option] your@kindle.cn"
         self.parser = OptionParser(
             usage, version="%prog 1.0.0", description='Kindle book push')
 
@@ -236,9 +235,7 @@ tls=True
             
 
     def digest(self, string):
-        # key = str(binascii.crc32(bytes(mail + ':' + book, 'utf-8')) & 0xffffffff)
         m = hashlib.md5(string.encode(encoding='utf8'))
-        # m.update(mail + ':' + book)
         return m.hexdigest()
 
     def library(self):
@@ -264,7 +261,6 @@ tls=True
             print(kindle)
 
     def bibliography(self, user):
-        # dbf = 'cache/'+user;
         with dbm.open(self.group+'/'+user, 'r') as db:
             n = 0
             for key in db.keys():
@@ -277,10 +273,11 @@ tls=True
             for user in users:
                 # print(user)
                 if user.name == 'netkiller@kindle.cn.db':
-                    # continue
                     pass
                 elif user.name.endswith('@kindle.cn.db') or user.name.endswith('@kindle.com.db'):
                     self.kindle.add(user.name.replace('.db', ''))
+                else:
+                    self.kindle.add(user.name)
         self.kindle = sorted(self.kindle)
 
     def size(self, size):

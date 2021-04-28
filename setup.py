@@ -11,7 +11,7 @@ with open("README.md", "r") as file:
 
 setup(
 	name='netkiller-kindle',
-	version='0.0.2',
+	version='0.0.3',
 	author='Neo Chen',
 	author_email='netkiller@msn.com',
 	description="Send ebook to kindle device",
