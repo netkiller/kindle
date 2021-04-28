@@ -40,13 +40,12 @@ class Kindle():
             os.makedirs(os.path.expanduser(cfgdir))
         if not os.path.isfile(cfg):
             tmpfile = open(os.path.expanduser(cfg), "w").write(
-                """
-[default]
+                """[default]
 smtp=smtp-mail.outlook.com:587
 username=netkiller@msn.com
 password=
 tls=True
-                """
+"""
                 )
         self.config.read(cfg)
 
