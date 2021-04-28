@@ -43,3 +43,17 @@
         -o 10, --offset=10  Index offset number
         -D 2019-01-01, --date=2019-01-01
                             from date
+
+## SMTP
+
+    neo@MacBook-Pro-Neo ~/git/kindle % cat ~/.kindle/smtp.ini        
+
+    [default]
+    smtp=smtp-mail.outlook.com:587
+    username=netkiller@msn.com
+    password=
+    tls=True
+
+## Manual
+
+    

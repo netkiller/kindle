@@ -34,21 +34,21 @@ class Kindle():
 
         self.config = configparser.ConfigParser()
 
-        try:
-            cfg = os.path.expanduser('~/.kindle/smtp.ini')
-            if not os.path.isfile(cfg):
-                tmpfile = open(os.path.expanduser(cfg), "w").write(
-                    """
+        cfg = os.path.expanduser('~/.kindle/smtp.ini')
+        cfgdir = os.path.expanduser(os.path.dirname(cfg))
+        if not os.path.isdir(cfgdir):
+            os.makedirs(os.path.expanduser(cfgdir))
+        if not os.path.isfile(cfg):
+            tmpfile = open(os.path.expanduser(cfg), "w").write(
+                """
 [default]
 smtp=smtp-mail.outlook.com:587
 username=netkiller@msn.com
 password=
 tls=True
-                    """
-                    )
-            self.config.read(cfg)
-        except configparser.NoSectionError as error:
-            print(error)
+                """
+                )
+        self.config.read(cfg)
 
         usage = "usage: %prog [option] example@kindle.cn"
         self.parser = OptionParser(
