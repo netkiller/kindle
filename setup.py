@@ -12,13 +12,12 @@ with open("README.md", "r") as file:
 setup(
 	name='netkiller-kindle',
 	version='0.0.1',
-	#author=__author__,
+	author='Neo Chen',
 	author_email='netkiller@msn.com',
 	description="Send ebook to kindle device",
 	long_description=long_description,
 	long_description_content_type="text/markdown",
 	keywords='kindle',
-
 	url='http://netkiller.github.io',
 	download_url='https://github.com/netkiller/kindle',
 	license='MIT',
@@ -35,9 +34,9 @@ setup(
 	scripts=[
 		'bin/kindle'
 	],
-	include_package_data=True,
+
 	data_files = [
-		('etc', ['etc/kindle.ini']),
+		('etc', ['etc/kindle.ini'])
 		# ('~/.kindle', ['db/kindle/netkiller@kindle.cn.db'])
 		#('log', ['log/kindle.log']),
 		# ('share', ['share/kindle.md']),

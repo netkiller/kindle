@@ -11,6 +11,8 @@ try:
     import hashlib
     import configparser
     import math
+    from pkg_resources import resource_filename
+    from shutil import copyfile
 except ImportError:
     print('Python3 try again')
     exit()
@@ -31,8 +33,22 @@ class Kindle():
     def __init__(self):
 
         self.config = configparser.ConfigParser()
-        cfg = '/usr/local/etc/kindle.ini'
-        self.config.read(cfg)
+
+        try:
+            cfg = os.path.expanduser('~/.kindle/smtp.ini')
+            if not os.path.isfile(cfg):
+                tmpfile = open(os.path.expanduser(cfg), "w").write(
+                    """
+[default]
+smtp=smtp-mail.outlook.com:587
+username=netkiller@msn.com
+password=
+tls=True
+                    """
+                    )
+            self.config.read(cfg)
+        except configparser.NoSectionError as error:
+            print(error)
 
         usage = "usage: %prog [option] example@kindle.cn"
         self.parser = OptionParser(
@@ -63,7 +79,7 @@ class Kindle():
         self.parser.add_option_group(group)
 
         group = OptionGroup(self.parser, 'Advanced', '')
-        group.add_option('', '--smtp', dest='smtp', default='msn',
+        group.add_option('', '--smtp', dest='smtp', default='default',
                          help="smtp server default: msn", metavar='|'.join(self.config.sections()))
         group.add_option('', '--size', dest='size', type='int',
                          default=40, help="file size (MB)", metavar='40')
